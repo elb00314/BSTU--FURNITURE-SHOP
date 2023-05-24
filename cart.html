@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+    <link rel="stylesheet" href="./global.css" />
+    <link rel="stylesheet" href="./index.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Open Sans:wght@600&display=swap"
+    />
+  </head>
+  <body>
+    <div class="desktop" id="second">
+        <div class="header">
+            <nav class="menu">
+              <input id="menu-toggle" type="checkbox">
+              <label class="menu-btn" for="menu-toggle">
+                <span></span>
+              </label>
+              <ul class="menu__box">
+                <li><a class="menu__item" href="index.html">Каталог</a></li>
+                <li><a class="menu__item" href="index.html">Индивидуальная мебель</a></li>
+                <li><a class="menu__item" href="index.html">О компании</a></li>
+                <li><a class="menu__item" href="index.html">Контакты</a></li>
+              </ul>
+            </nav>
+            <div class="links">
+              <a href="index.html"><div class="div28">Каталог</div></a>
+              <a href="index.html"><div class="div29">Индивидуальная мебель</div></a>
+              <a href="index.html"><div class="div30">О компании</div></a>
+              <a href="index.html"><div class="div31">Контакты</div></a>
+              <div class="div32">+375298455053</div>
+            </div>
+            <a href="index.html">
+            <img class="logo-icon" alt="" src="./assets/png/logo@2x.png" />
+            </a>
+        </div>
+        <div class="cart">
+            <h1>Корзина</h1>
+            <form>
+              <label for="products">Выберите товар:</label>
+              <select id="products">
+                <option value="">--Выберите товар--</option>
+                <option value="Диван ALBA" data-price="150">Диван Alba 150 рублей</option>
+                <option value="Диван MARIO" data-price="200">Диван Mario 200 рублей</option>
+                <option value="Стул LUARA" data-price="300">Кресло LUARA 300 рублей</option>
+              </select>
+              <label for="quantity">Количество:</label>
+              <input type="number" id="quantity" min="1" max="10">
+              <button type="button" id="add-to-cart">Добавить в корзину</button>
+            </form>
+            <ul id="cart"></ul>
+            <p id="total"></p>
+            <button class="sloganbtn" onclick="finish()">
+                <div class="sloganbtn-child"></div>
+                <b class="b3">Оформить заказ</b>
+              </button>   
+        </div>
+        <script>
+            // Находим элементы HTML:
+            const productsSelect = document.getElementById('products');
+            const quantityInput = document.getElementById('quantity');
+            const addToCartButton = document.getElementById('add-to-cart');
+            const cartList = document.getElementById('cart');
+            const total = document.getElementById('total');
+
+            // Объявляем объект корзины:
+            const cart = {
+            items: [],
+            
+            // Метод для добавления товара в корзину:
+            addItem(item) {
+                this.items.push(item);
+            },
+            
+            // Метод для подсчета общей стоимости товаров в корзине:
+            getTotal() {
+                return this.items.reduce((total, item) => {
+                return total + (item.price * item.quantity);
+                }, 0);
+            },
+            
+            // Метод для отображения корзины:
+            render() {
+                cartList.innerHTML = '';
+                this.items.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = `${item.quantity} x ${item.product} - ${item.price * item.quantity} руб.`;
+                cartList.appendChild(li);
+                });
+                
+                total.textContent = `Общая стоимость: ${this.getTotal()} руб.`;
+            }
+            };
+
+            // Обработчик события клика на кнопку "Добавить в корзину":
+            addToCartButton.addEventListener('click', () => {
+            const product = productsSelect.value;
+            const quantity = quantityInput.value;
+            
+            if (product && quantity) {
+                const price = parseFloat(productsSelect.options[productsSelect.selectedIndex].getAttribute('data-price'));
+                
+                // Создаем объект товара и добавляем его в корзину:
+                const item = { product, quantity, price };
+                cart.addItem(item);
+                
+                // Отображаем корзину:
+                cart.render();
+                
+                // Очищаем поля выбора товара и ввода количества:
+                productsSelect.value = '';
+                quantityInput.value = '';
+            }
+            });
+            function finish(){
+                alert("Заказ был принят в обработку!");
+                location.reload();
+            }
+        </script>
+        <div class="contact" id="con">
+            <img class="bg-icon" alt="" src="./assets/png/bg@2x.png" />
+    
+            <div class="contactform">
+              <div class="form-text">
+                <b class="b1">Индивидуальный просчет</b>
+                <div class="div17">Заполните форму, и мы с вами свяжемся</div>
+              </div>
+              <div class="credits">
+                  <input class="name" placeholder="Ваше имя"type="text" />
+                  <input class="number" placeholder="Номер телефона" type="text" />
+                <input class="country" placeholder="Страна" type="text" />
+    
+                <input class="comment" placeholder="Комментарий" type="text" />
+              </div>
+              <div class="accept">
+                <div class="div20">
+                  Подтверждая заказ, я принимаю условия пользовательского соглашения
+                </div>
+                <input class="accept-child" type="checkbox" />
+              </div>
+              <button class="contactbtn">
+                <div class="contactbtn-child"></div>
+                <b class="b2">запросить звонок</b>
+              </button>
+            </div>
+          </div>
+        <div class="footer" id="c">
+            <div class="ekmi">© 1993–2021 Интернет-магазин «EKMI™» — Мебели</div>
+            <div class="contacts">
+              <div class="div">г. Брест, ул. Колесника 10</div>
+              <div class="ekmigmailcom">ekmi@gmail.com</div>
+              <div class="div1">+375298455053</div>
+              <div class="div2">Контакты</div>
+            </div>
+            <div class="time">
+              <div class="div3">
+                <span class="txt">
+                  <p class="p">Пн-пт</p>
+                  <p class="p">09:00-21:00</p>
+                </span>
+              </div>
+              <div class="div4">
+                <span class="txt">
+                  <p class="p">Сб-вс</p>
+                  <p class="p">10:00-19:00</p>
+                </span>
+              </div>
+              <div class="div5">Часы работы</div>
+            </div>
+            <img class="logo-w-1-2-icon" alt="" src="./assets/png/logow1-2@2x.png" />
+    
+            <button class="footerbtn">
+              <img
+                class="footerbtn-child"
+                alt=""
+                src="./assets/svg/rectangle-160.svg"
+              />
+    
+              <img class="footerbtn-item" alt="" src="./assets/svg/arrow-1.svg" />
+    
+              <div class="div6">Персональная консультация</div>
+            </button>
+            <img class="socials-icon" alt="" src="./assets/svg/socials.svg" />
+          </div>
+    </div> 
+  </body>
+</html> 

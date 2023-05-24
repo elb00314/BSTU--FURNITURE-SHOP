@@ -1,9 +1,10 @@
-# BSTU--FURNITURE-SHOP
-Мебельный магазин
-На сайте можно увидеть:
-1. Каталог нашей мебели. 
-2. Стоимость на заинтересованную вами мебель. 
-3. Связаться с нашим менеджером, если у вас возникли вопросы. 
-4. Узнать наши контакты и социальные сети.
-5. Посмотреть историю нашего производства.
-6. Прочитать ответы на самые популярные вопросы.
+
+  # Liza
+
+  Note: Please ensure you have installed <code><a href="https://nodejs.org/en/download/">nodejs</a></code>
+
+  To preview and run the project on your device:
+  1) Open project folder in <a href="https://code.visualstudio.com/download">Visual Studio Code</a>
+  2) In the terminal, run `npm install`
+  3) Run `npm start` to view project in browser
+  
